@@ -1,0 +1,29 @@
+(serialized_options=.* )|(serialized_options=.*,)
+
+=================================================
+extension_scope=None,$
+extension_scope=None,file=DESCRIPTOR),
+
+train_ds = tf.keras.preprocessing.image_dataset_from_directory(
+'Dataset',
+labels='inferred',
+label_mode = "binary",
+colormode = 'grayscale',
+batch_size = 32,
+image_size = (32,32),
+shuffle=True,
+seed=123,
+validation_split=0.1,
+subset="training",)
+
+test_ds = tf.keras.preprocessing.image_dataset_from_directory(
+'Dataset',
+labels='inferred',
+label_mode = "binary",
+colormode = 'grayscale',
+batch_size = 32,
+image_size = (32,32),
+shuffle=True,
+seed=123,
+validation_split=0.1,
+subset="validation",)
