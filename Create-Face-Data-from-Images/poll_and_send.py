@@ -64,7 +64,7 @@ while check_flag == False:
         
         pil_image = Image.open(camera_path + '/' + latest_file[0]).convert('RGB')
         image = np.array(pil_image)
-        
+        image = image[:,:, ::-1].copy()
         
 
 
