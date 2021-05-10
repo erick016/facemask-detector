@@ -4,11 +4,14 @@ import numpy as np
 import binascii
 import serial
 import time
+from PIL import Image
 
 check_flag = False
+port_name = input('Enter COM port(for example, COM1, COM2, or COM3 etc.): ')
+camera_path = input('Enter phone camera pathfile(make sure to have phone mounted as a network drive via the webdav app): ')
 
 serialPort = serial.Serial(
-    port="COM4", baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE
+    port= port_name, baudrate=9600, bytesize=8, timeout=2, stopbits=serial.STOPBITS_ONE
 )
 
 # Define paths
@@ -26,11 +29,11 @@ image_count = 0
 old_files = []
 new_files = []
 
-for file in os.listdir('Z:/DCIM/Camera'):
+for file in os.listdir(camera_path):
+    print(file)
     android_file_name, android_file_extension = os.path.splitext(file)
     if (android_file_extension in ['.png','.jpg']):
         old_image_count += 1
-    
     
     old_files.append(file)
 
@@ -42,14 +45,13 @@ while check_flag == False:
 
     new_files = []
     
-    for file in os.listdir('Z:/DCIM/Camera'):
+    for file in os.listdir(camera_path):
         android_file_name, android_file_extension = os.path.splitext(file)
         if (android_file_extension in ['.png','.jpg']):
             image_count += 1
-        #print(str(old_image_count) + "|" + str(image_count))
+
         
         new_files.append(file)
-
 
         
     if (image_count > old_image_count):
@@ -59,7 +61,11 @@ while check_flag == False:
         latest_file = list(set(new_files) - set(old_files))
         print(latest_file[0])
         old_files = new_files
-        image = cv2.imread('Z:/DCIM/Camera/' + latest_file[0])
+        
+        pil_image = Image.open(camera_path + '/' + latest_file[0]).convert('RGB')
+        image = np.array(pil_image)
+        
+        
 
 
         (h, w) = image.shape[:2]
@@ -99,7 +105,7 @@ while check_flag == False:
         
                 check_flag = True 
 
-            
+            #break
 
     else:
         image_count = 0
