@@ -61,14 +61,20 @@ while check_flag == False:
         latest_file = list(set(new_files) - set(old_files))
         print(latest_file[0])
         old_files = new_files
-        
-        pil_image = Image.open(camera_path + '/' + latest_file[0]).convert('RGB')
-        image = np.array(pil_image)
-        image = image[:,:, ::-1].copy()
-        
 
+        try:
+            image = cv2.imread(camera_path + '/' + latest_file[0])
+            (h, w) = image.shape[:2]
+            print('CV2 success.')
 
-        (h, w) = image.shape[:2]
+        except:
+            pil_image = Image.open(camera_path + '/' + latest_file[0]).convert('RGB')
+            image = np.array(pil_image)
+            image = image[:,:, ::-1].copy()
+            (h, w) = image.shape[:2]
+            print('Had to use PIL.')        
+
+        
         blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 1.0, (300, 300), (104.0, 177.0, 123.0))
 
         model.setInput(blob)

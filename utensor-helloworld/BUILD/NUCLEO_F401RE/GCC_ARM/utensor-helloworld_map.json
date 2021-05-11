@@ -2,7 +2,7 @@
     {
         "module": "[fill]",
         "size": {
-            ".text": 118,
+            ".text": 110,
             ".data": 0,
             ".bss": 25,
             ".text-delta": 0,
@@ -79,7 +79,7 @@
     {
         "module": "main_original.o",
         "size": {
-            ".text": 11356,
+            ".text": 11364,
             ".data": 0,
             ".bss": 10900,
             ".text-delta": 0,

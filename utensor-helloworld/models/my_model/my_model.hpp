@@ -17,17 +17,17 @@ class My_model : public ModelInterface<1, 1>
   // Operators
   ReferenceOperators::MaxPoolOperator<int8_t> op_MaxPoolOperator_000;
 
-  TflmSymQuantOps::DequantizeOperator<float, int8_t> op_DequantizeOperator_001;
+  TflmSymQuantOps::DepthwiseSeparableConvOperator<int8_t> op_DepthwiseSeparableConvOperator_001;
 
-  TflmSymQuantOps::DepthwiseSeparableConvOperator<int8_t> op_DepthwiseSeparableConvOperator_002;
+  TflmSymQuantOps::DequantizeOperator<float, int8_t> op_DequantizeOperator_002;
 
-  TflmSymQuantOps::QuantizeOperator<int8_t, float> op_QuantizeOperator_003;
+  ReferenceOperators::ReshapeOperator<int8_t> op_ReshapeOperator_003;
 
   TflmSymQuantOps::FullyConnectedOperator<int8_t> op_FullyConnectedOperator_004;
 
   TflmSymQuantOps::FullyConnectedOperator<int8_t> op_FullyConnectedOperator_005;
 
-  ReferenceOperators::ReshapeOperator<int8_t> op_ReshapeOperator_006;
+  TflmSymQuantOps::QuantizeOperator<int8_t, float> op_QuantizeOperator_006;
 
   // memory allocators
   localCircularArenaAllocator<4440, uint16_t> ram_allocator;

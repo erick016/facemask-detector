@@ -90,7 +90,15 @@ int main(void) {
   input_image.free();
   logits.free();
 
-  printf("pred label: %d\r\n", max_index);
+  if (max_index == 0)
+  {
+    printf("pred label: masked \r\n");
+  }
+
+  else
+  {
+    printf("pred label: unmasked \r\n");
+  }
 
 }
 
